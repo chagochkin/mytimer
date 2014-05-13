@@ -11,11 +11,19 @@ class StepTimer:
     def print_info(self, label=None):
         t = time.time()
         self.print_count += 1
+
         if self.name:
-            sys.stdout.write('[' + self.name + ']')
-        print u'[%s: %.3fsec., %.3fsec.]' % (label or unicode(self.print_count),
-                                            t - self.last_time,
-                                            t - self.start_time)
+            sys.stdout.write(u'<%s ' % self.name)
+
+        sys.stdout.write(u'[%s: %.3fs. - step, %.3fs. - total]' % (
+            label or unicode(self.print_count),
+            t - self.last_time,
+            t - self.start_time
+        )
+        
+        if self.name:
+            sys.stdout.write(u'>')
+
         self.last_time = time.time()
 
 
